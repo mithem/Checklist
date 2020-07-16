@@ -32,3 +32,27 @@ class Checklist: Identifiable, Codable {
         self.items = items
     }
 }
+
+struct ChecklistBlueprint: Identifiable, Codable {
+    let id: UUID
+    var icon: String
+    var name: String
+    var items: [ChecklistBlueprintItem]
+    
+    init(icon: String, name: String, items: [ChecklistBlueprintItem]) {
+        id = UUID()
+        self.icon = icon
+        self.name = name
+        self.items = items
+    }
+}
+
+struct ChecklistBlueprintItem: Identifiable, Codable {
+    let id: UUID
+    var title: String
+    
+    init(title: String) {
+        id = UUID()
+        self.title = title
+    }
+}

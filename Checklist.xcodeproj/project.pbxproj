@@ -17,6 +17,10 @@
 		492782E324BF010D00415EC8 /* AddChecklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492782E224BF010D00415EC8 /* AddChecklistView.swift */; };
 		492782E524BF06E800415EC8 /* ChecklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492782E424BF06E800415EC8 /* ChecklistView.swift */; };
 		4984577A24BF23DE0087F205 /* CheckToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4984577924BF23DE0087F205 /* CheckToggle.swift */; };
+		49E1C72B24C09D350031CC35 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E1C72A24C09D350031CC35 /* GalleryView.swift */; };
+		49E1C72D24C09F060031CC35 /* GalleryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E1C72C24C09F060031CC35 /* GalleryItemView.swift */; };
+		49E1C72F24C09FB40031CC35 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E1C72E24C09FB40031CC35 /* constants.swift */; };
+		49E1C73124C0C0490031CC35 /* shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E1C73024C0C0490031CC35 /* shared.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +36,10 @@
 		492782E224BF010D00415EC8 /* AddChecklistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChecklistView.swift; sourceTree = "<group>"; };
 		492782E424BF06E800415EC8 /* ChecklistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistView.swift; sourceTree = "<group>"; };
 		4984577924BF23DE0087F205 /* CheckToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckToggle.swift; sourceTree = "<group>"; };
+		49E1C72A24C09D350031CC35 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
+		49E1C72C24C09F060031CC35 /* GalleryItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryItemView.swift; sourceTree = "<group>"; };
+		49E1C72E24C09FB40031CC35 /* constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
+		49E1C73024C0C0490031CC35 /* shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shared.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +76,8 @@
 				492782CB24BEF3CA00415EC8 /* ChecklistApp.swift */,
 				492782CD24BEF3CA00415EC8 /* ContentView.swift */,
 				492782DA24BEF3E100415EC8 /* ChecklistListView.swift */,
+				49E1C72A24C09D350031CC35 /* GalleryView.swift */,
+				49E1C72C24C09F060031CC35 /* GalleryItemView.swift */,
 				492782E424BF06E800415EC8 /* ChecklistView.swift */,
 				4984577924BF23DE0087F205 /* CheckToggle.swift */,
 				492782E224BF010D00415EC8 /* AddChecklistView.swift */,
@@ -91,6 +101,8 @@
 			isa = PBXGroup;
 			children = (
 				492782DE24BEF41200415EC8 /* models.swift */,
+				49E1C73024C0C0490031CC35 /* shared.swift */,
+				49E1C72E24C09FB40031CC35 /* constants.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -166,11 +178,15 @@
 			files = (
 				492782DB24BEF3E100415EC8 /* ChecklistListView.swift in Sources */,
 				492782CE24BEF3CA00415EC8 /* ContentView.swift in Sources */,
+				49E1C72D24C09F060031CC35 /* GalleryItemView.swift in Sources */,
 				492782E124BEF71100415EC8 /* ChecklistsWrapper.swift in Sources */,
+				49E1C72F24C09FB40031CC35 /* constants.swift in Sources */,
 				492782CC24BEF3CA00415EC8 /* ChecklistApp.swift in Sources */,
 				4984577A24BF23DE0087F205 /* CheckToggle.swift in Sources */,
 				492782DF24BEF41200415EC8 /* models.swift in Sources */,
 				492782E324BF010D00415EC8 /* AddChecklistView.swift in Sources */,
+				49E1C72B24C09D350031CC35 /* GalleryView.swift in Sources */,
+				49E1C73124C0C0490031CC35 /* shared.swift in Sources */,
 				492782E524BF06E800415EC8 /* ChecklistView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

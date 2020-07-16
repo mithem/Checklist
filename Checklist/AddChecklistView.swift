@@ -20,12 +20,68 @@ struct AddChecklistView: View {
             Form {
                 Section {
                     TextField("name", text: $name)
-                    VStack {
-                        HStack {
-                            AddChecklistViewIconSelector(icon: "checkmark", delegate: self)
-                            AddChecklistViewIconSelector(icon: "paperplane", delegate: self)
-                            AddChecklistViewIconSelector(icon: "airplane", delegate: self)
-                            AddChecklistViewIconSelector(icon: "tram", delegate: self)
+                    VStack(alignment: .leading, spacing: 30) {
+                        ScrollView(.horizontal) {
+                            HStack {
+                                AddChecklistViewIconSelector(icon: "checkmark", delegate: self)
+                                AddChecklistViewIconSelector(icon: "paperplane", delegate: self)
+                                AddChecklistViewIconSelector(icon: "airplane", delegate: self)
+                                AddChecklistViewIconSelector(icon: "tram", delegate: self)
+                                AddChecklistViewIconSelector(icon: "bus", delegate: self)
+                                AddChecklistViewIconSelector(icon: "car", delegate: self)
+                                AddChecklistViewIconSelector(icon: "bicycle", delegate: self)
+                            }
+                        }
+                        ScrollView(.horizontal) {
+                            HStack {
+                                AddChecklistViewIconSelector(icon: "cart", delegate: self)
+                                AddChecklistViewIconSelector(icon: "house", delegate: self)
+                                AddChecklistViewIconSelector(icon: "ticket", delegate: self)
+                                AddChecklistViewIconSelector(icon: "heart", delegate: self)
+                                AddChecklistViewIconSelector(icon: "gift", delegate: self)
+                            }
+                        }
+                        ScrollView(.horizontal) {
+                            HStack {
+                                AddChecklistViewIconSelector(icon: "graduationcap", delegate: self)
+                                AddChecklistViewIconSelector(icon: "paperclip", delegate: self)
+                                AddChecklistViewIconSelector(icon: "envelope", delegate: self)
+                                AddChecklistViewIconSelector(icon: "building.columns", delegate: self)
+                            }
+                        }
+                        ScrollView(.horizontal) {
+                            HStack {
+                                AddChecklistViewIconSelector(icon: "music.note", delegate: self)
+                                AddChecklistViewIconSelector(icon: "music.mic", delegate: self)
+                                AddChecklistViewIconSelector(icon: "megaphone", delegate: self)
+                                AddChecklistViewIconSelector(icon: "mic", delegate: self)
+                                AddChecklistViewIconSelector(icon: "camera", delegate: self)
+                                AddChecklistViewIconSelector(icon: "signpost.right", delegate: self)
+                                AddChecklistViewIconSelector(icon: "sportscourt", delegate: self)
+                            }
+                        }
+                        ScrollView(.horizontal) {
+                            HStack {
+                                AddChecklistViewIconSelector(icon: "bed.double", delegate: self)
+                                AddChecklistViewIconSelector(icon: "flashlight.on.fill", delegate: self)
+                                AddChecklistViewIconSelector(icon: "gauge", delegate: self)
+                                AddChecklistViewIconSelector(icon: "speedometer", delegate: self)
+                                AddChecklistViewIconSelector(icon: "barometer", delegate: self)
+                                AddChecklistViewIconSelector(icon: "bandage", delegate: self)
+                                AddChecklistViewIconSelector(icon: "cross.case", delegate: self)
+                                AddChecklistViewIconSelector(icon: "wrench.and.screwdriver", delegate: self)
+                                AddChecklistViewIconSelector(icon: "lock", delegate: self)
+                                AddChecklistViewIconSelector(icon: "key", delegate: self)
+                            }
+                        }
+                        ScrollView(.horizontal) {
+                            HStack {
+                                AddChecklistViewIconSelector(icon: "shield", delegate: self)
+                                AddChecklistViewIconSelector(icon: "point.topleft.down.curvedto.point.bottomright.up", delegate: self)
+                                AddChecklistViewIconSelector(icon: "shippingbox", delegate: self)
+                                AddChecklistViewIconSelector(icon: "clock", delegate: self)
+                                AddChecklistViewIconSelector(icon: "banknote", delegate: self)
+                            }
                         }
                     }
                 }

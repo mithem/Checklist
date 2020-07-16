@@ -54,6 +54,7 @@ struct ChecklistView: View {
         }) {
             Image(systemName: "plus")
                 .foregroundColor(colorScheme == .dark ? .white : .black)
+                .padding()
         })
         .onAppear(perform: checkForEmptyList)
     }
@@ -120,7 +121,7 @@ protocol ChecklistViewDelegate {
 
 struct ChecklistView_Previews: PreviewProvider, ChecklistViewDelegate {
     static var previews: some View {
-        ChecklistView(delegate: self as! ChecklistViewDelegate, checklist: Checklist(icon: "plane", name: "My Checklist", items: [ChecklistItem(title: "Hello there (#1)"), ChecklistItem(title: "Hello hoo (#2)")]))
+        ChecklistView(delegate: self as! ChecklistViewDelegate, checklist: checklistForPreviews)
     }
     func changeChecklist(_ checklist: Checklist) {}
 }

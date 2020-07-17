@@ -25,6 +25,45 @@ struct ChecklistView: View {
     
     var body: some View {
         List {
+            ForEach(0..<1) { _ in
+                if showingEmptyItem {
+                    TextField("new item", text: $newItemTitle)
+                    Group {
+                        if checklist.sections.count > 1 {
+                            NavigationLink(destination: SelectSectionView(sections: checklist.sections, delegate: self)) {
+                                Text("Add")
+                                    .foregroundColor(newItemTitle.isEmpty ? .secondary : .blue)
+                            }
+                            .disabled(newItemTitle.isEmpty)
+                        } else if checklist.sections.count == 1 {
+                            Button(action: {
+                                addItem(to: checklist.sections.first!)
+                            }) {
+                                Text("Add")
+                                    .foregroundColor(newItemTitle.isEmpty ? .secondary : .blue)
+                            }
+                        }
+                    }
+                }
+            }
+            .onDelete { _ in
+                showingEmptyItem = false
+            }
+            ForEach(0..<1) { _ in
+                if showingAddSectionView {
+                    TextField("section name", text: $newSectionTitle)
+                    Button(action: {
+                        addSection()
+                    }) {
+                        Text("Add")
+                            .foregroundColor(newSectionTitle.isEmpty ? .secondary : .blue)
+                    }
+                    .disabled(newSectionTitle.isEmpty)
+                }
+            }
+            .onDelete { _ in
+                showingAddSectionView = false
+            }
             ForEach(checklist.sections) { section in
                 SwiftUI.Section(header: Text(section.name).textCase(.none)) {
                     ForEach(section.items) { checklistItem in
@@ -37,37 +76,13 @@ struct ChecklistView: View {
                                 .foregroundColor(checklistItem.checked ? .secondary : .primary)
                         }
                     }
-                    .onMove(perform: moveItems)
-                    .onDelete(perform: deleteItems)
-                }
-            }
-            if showingEmptyItem {
-                TextField("new item", text: $newItemTitle)
-                Group {
-                    if checklist.sections.count > 1 {
-                        NavigationLink(destination: SelectSectionView(sections: checklist.sections, delegate: self)) {
-                            Text("Add")
-                                .foregroundColor(newItemTitle.isEmpty ? .secondary : .blue)
-                        }
-                        .disabled(newItemTitle.isEmpty)
-                    } else if checklist.sections.count == 1 {
-                        Button(action: {
-                            addItem(to: checklist.sections.first!)
-                        }) {
-                            Text("Add")
-                                .foregroundColor(newItemTitle.isEmpty ? .secondary : .blue)
-                        }
+                    .onMove { source, destination in
+                        moveItems(source: source, destination: destination, in: section)
+                    }
+                    .onDelete { offsets in
+                        deleteItems(offsets: offsets, of: section)
                     }
                 }
-            } else if showingAddSectionView {
-                TextField("section name", text: $newSectionTitle)
-                Button(action: {
-                    addSection()
-                }) {
-                    Text("Add")
-                        .foregroundColor(newSectionTitle.isEmpty ? .secondary : .blue)
-                }
-                .disabled(newSectionTitle.isEmpty)
             }
             NavigationLink(destination: SectionListView(sections: checklist.sections, delegate: self)) {
                 Text("Manage sections")
@@ -121,14 +136,14 @@ struct ChecklistView: View {
         }
     }
     
-    func deleteItems(offsets: IndexSet) {
-        checklist.sections.first?.items.remove(atOffsets: offsets)
+    func deleteItems(offsets: IndexSet, of section: Section) {
+        section.items.remove(atOffsets: offsets)
         delegate.changeChecklist(checklist)
         checkForEmptyList()
     }
     
-    func moveItems(source: IndexSet, destination: Int) {
-        checklist.sections.first?.items.move(fromOffsets: source, toOffset: destination)
+    func moveItems(source: IndexSet, destination: Int, in section: Section) {
+        section.items.move(fromOffsets: source, toOffset: destination)
         delegate.changeChecklist(checklist)
     }
 }

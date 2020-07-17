@@ -23,6 +23,7 @@
 		49E1C72D24C09F060031CC35 /* GalleryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E1C72C24C09F060031CC35 /* GalleryItemView.swift */; };
 		49E1C72F24C09FB40031CC35 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E1C72E24C09FB40031CC35 /* constants.swift */; };
 		49E1C73124C0C0490031CC35 /* shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E1C73024C0C0490031CC35 /* shared.swift */; };
+		49F386AF24C1B8B100627548 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F386AE24C1B8B100627548 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,8 @@
 		49E1C72C24C09F060031CC35 /* GalleryItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryItemView.swift; sourceTree = "<group>"; };
 		49E1C72E24C09FB40031CC35 /* constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		49E1C73024C0C0490031CC35 /* shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shared.swift; sourceTree = "<group>"; };
+		49F386AE24C1B8B100627548 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		49F386B024C1B8E200627548 /* Checklist.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Checklist.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,12 +80,14 @@
 		492782CA24BEF3CA00415EC8 /* Checklist */ = {
 			isa = PBXGroup;
 			children = (
+				49F386B024C1B8E200627548 /* Checklist.entitlements */,
 				492782CB24BEF3CA00415EC8 /* ChecklistApp.swift */,
 				492782CD24BEF3CA00415EC8 /* ContentView.swift */,
 				492782DA24BEF3E100415EC8 /* ChecklistListView.swift */,
 				49E1C72A24C09D350031CC35 /* GalleryView.swift */,
 				49E1C72C24C09F060031CC35 /* GalleryItemView.swift */,
 				492782E424BF06E800415EC8 /* ChecklistView.swift */,
+				49F386AE24C1B8B100627548 /* Launch Screen.storyboard */,
 				49ACC77424C1A2F9006CC788 /* SectionListView.swift */,
 				49ACC77224C1A17C006CC788 /* SelectSectionView.swift */,
 				4984577924BF23DE0087F205 /* CheckToggle.swift */,
@@ -170,6 +175,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49F386AF24C1B8B100627548 /* Launch Screen.storyboard in Resources */,
 				492782D324BEF3CC00415EC8 /* Preview Assets.xcassets in Resources */,
 				492782D024BEF3CC00415EC8 /* Assets.xcassets in Resources */,
 			);
@@ -323,6 +329,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Checklist/Checklist.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Checklist/Preview Content\"";
 				DEVELOPMENT_TEAM = MHQFP8C3YS;
@@ -335,8 +342,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = mithem.Checklist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Debug;
 		};
@@ -345,6 +353,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Checklist/Checklist.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Checklist/Preview Content\"";
 				DEVELOPMENT_TEAM = MHQFP8C3YS;
@@ -357,8 +366,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = mithem.Checklist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Release;
 		};

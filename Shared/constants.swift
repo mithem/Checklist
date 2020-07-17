@@ -7,5 +7,5 @@
 
 import Foundation
 
-let checklistForPreviews = Checklist(icon: "plane", name: "My Checklist", items: [ChecklistItem(title: "Hello there (#1)"), ChecklistItem(title: "Hello hoo (#2)")])
-let checklistBlueprintForPreviews = ChecklistBlueprint(icon: "plane", name: "My Checklist", items: [ChecklistBlueprintItem(title: "Hello there (#1)"), ChecklistBlueprintItem(title: "Hello hoo (#2)")])
+let checklistForPreviews = Checklist(icon: "plane", name: "My Checklist", sections: [Section(name: "My Section", items: [ChecklistItem(title: "Hello there (#1)"), ChecklistItem(title: "Hello hoo (#2)")])])
+let checklistBlueprintForPreviews = ChecklistBlueprint(icon: "plane", name: "My Checklist", sections: [SectionBlueprint(name: "My Section", items: [ChecklistBlueprintItem(title: "Hello there (#1)"), ChecklistBlueprintItem(title: "Hello hoo (#2)")])])

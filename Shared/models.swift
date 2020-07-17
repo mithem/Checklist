@@ -23,11 +23,35 @@ class Checklist: Identifiable, Codable {
     let id: UUID
     var icon: String
     var name: String
-    var items = [ChecklistItem]()
+    var sections = [Section]()
     
-    init(icon: String, name: String, items: [ChecklistItem] = []) {
+    init(icon: String, name: String, sections: [Section] = []) {
         id = UUID()
         self.icon = icon
+        self.name = name
+        self.sections = sections
+    }
+}
+
+class Section: Identifiable, Codable {
+    let id: UUID
+    var name: String
+    var items: [ChecklistItem]
+    
+    init(name: String, items: [ChecklistItem] = []) {
+        id = UUID()
+        self.name = name
+        self.items = items
+    }
+}
+
+struct SectionBlueprint: Identifiable, Codable {
+    let id: UUID
+    var name: String
+    var items: [ChecklistBlueprintItem]
+    
+    init(name: String, items: [ChecklistBlueprintItem] = []) {
+        id = UUID()
         self.name = name
         self.items = items
     }
@@ -37,13 +61,13 @@ struct ChecklistBlueprint: Identifiable, Codable {
     let id: UUID
     var icon: String
     var name: String
-    var items: [ChecklistBlueprintItem]
+    var sections: [SectionBlueprint]
     
-    init(icon: String, name: String, items: [ChecklistBlueprintItem]) {
+    init(icon: String, name: String, sections: [SectionBlueprint]) {
         id = UUID()
         self.icon = icon
         self.name = name
-        self.items = items
+        self.sections = sections
     }
 }
 

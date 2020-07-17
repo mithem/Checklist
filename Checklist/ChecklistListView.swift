@@ -17,11 +17,16 @@ struct ChecklistListView: View {
     @State private var showingAddChecklistView = false
     @State private var showingAddedToGalleryActionSheet = false
     
+    @State private var showingExportToThingsView = false
+    
     var body: some View {
         NavigationView {
             List {
                 NavigationLink(destination: GalleryView(wrapper: wrapper)) {
                     Text("Gallery")
+                }
+                Button("Export to Things") {
+                    showingExportToThingsView = true
                 }
                 ForEach(wrapper.checklists) { checklist in
                     NavigationLink(destination: ChecklistView(delegate: self, checklist: checklist)) {
@@ -50,6 +55,9 @@ struct ChecklistListView: View {
             })
             .actionSheet(isPresented: $showingAddedToGalleryActionSheet) {
                 ActionSheet(title: Text("Added to gallery"), message: Text("Successfully added checklist as a template to the gallery"), buttons: [.default(Text("OK"))])
+            }
+            .sheet(isPresented: $showingExportToThingsView) {
+                ExportToThingsView(wrapper: wrapper)
             }
         }
         .onDisappear {

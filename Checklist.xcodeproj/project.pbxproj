@@ -19,6 +19,7 @@
 		4984577A24BF23DE0087F205 /* CheckToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4984577924BF23DE0087F205 /* CheckToggle.swift */; };
 		49ACC77324C1A17C006CC788 /* SelectSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ACC77224C1A17C006CC788 /* SelectSectionView.swift */; };
 		49ACC77524C1A2F9006CC788 /* SectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ACC77424C1A2F9006CC788 /* SectionListView.swift */; };
+		49AEC8F624C1F1F700B05264 /* ExportToThingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AEC8F524C1F1F700B05264 /* ExportToThingsView.swift */; };
 		49E1C72B24C09D350031CC35 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E1C72A24C09D350031CC35 /* GalleryView.swift */; };
 		49E1C72D24C09F060031CC35 /* GalleryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E1C72C24C09F060031CC35 /* GalleryItemView.swift */; };
 		49E1C72F24C09FB40031CC35 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E1C72E24C09FB40031CC35 /* constants.swift */; };
@@ -41,6 +42,7 @@
 		4984577924BF23DE0087F205 /* CheckToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckToggle.swift; sourceTree = "<group>"; };
 		49ACC77224C1A17C006CC788 /* SelectSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSectionView.swift; sourceTree = "<group>"; };
 		49ACC77424C1A2F9006CC788 /* SectionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionListView.swift; sourceTree = "<group>"; };
+		49AEC8F524C1F1F700B05264 /* ExportToThingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportToThingsView.swift; sourceTree = "<group>"; };
 		49E1C72A24C09D350031CC35 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
 		49E1C72C24C09F060031CC35 /* GalleryItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryItemView.swift; sourceTree = "<group>"; };
 		49E1C72E24C09FB40031CC35 /* constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				492782CB24BEF3CA00415EC8 /* ChecklistApp.swift */,
 				492782CD24BEF3CA00415EC8 /* ContentView.swift */,
 				492782DA24BEF3E100415EC8 /* ChecklistListView.swift */,
+				49AEC8F524C1F1F700B05264 /* ExportToThingsView.swift */,
 				49E1C72A24C09D350031CC35 /* GalleryView.swift */,
 				49E1C72C24C09F060031CC35 /* GalleryItemView.swift */,
 				492782E424BF06E800415EC8 /* ChecklistView.swift */,
@@ -190,6 +193,7 @@
 			files = (
 				492782DB24BEF3E100415EC8 /* ChecklistListView.swift in Sources */,
 				49ACC77524C1A2F9006CC788 /* SectionListView.swift in Sources */,
+				49AEC8F624C1F1F700B05264 /* ExportToThingsView.swift in Sources */,
 				492782CE24BEF3CA00415EC8 /* ContentView.swift in Sources */,
 				49E1C72D24C09F060031CC35 /* GalleryItemView.swift in Sources */,
 				492782E124BEF71100415EC8 /* ChecklistsWrapper.swift in Sources */,

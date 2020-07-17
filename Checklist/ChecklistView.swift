@@ -41,40 +41,36 @@ struct ChecklistView: View {
                     .onDelete(perform: deleteItems)
                 }
             }
-            SwiftUI.Section {
-                if showingEmptyItem {
-                    TextField("new item", text: $newItemTitle)
-                    Group {
-                        if checklist.sections.count > 1 {
-                            NavigationLink(destination: SelectSectionView(sections: checklist.sections, delegate: self)) {
-                                Text("Add")
-                                    .foregroundColor(newItemTitle.isEmpty ? .secondary : .blue)
-                            }
-                            .disabled(newItemTitle.isEmpty)
-                        } else if checklist.sections.count == 1 {
-                            Button(action: {
-                                addItem(to: checklist.sections.first!)
-                            }) {
-                                Text("Add")
-                                    .foregroundColor(newItemTitle.isEmpty ? .secondary : .blue)
-                            }
+            if showingEmptyItem {
+                TextField("new item", text: $newItemTitle)
+                Group {
+                    if checklist.sections.count > 1 {
+                        NavigationLink(destination: SelectSectionView(sections: checklist.sections, delegate: self)) {
+                            Text("Add")
+                                .foregroundColor(newItemTitle.isEmpty ? .secondary : .blue)
+                        }
+                        .disabled(newItemTitle.isEmpty)
+                    } else if checklist.sections.count == 1 {
+                        Button(action: {
+                            addItem(to: checklist.sections.first!)
+                        }) {
+                            Text("Add")
+                                .foregroundColor(newItemTitle.isEmpty ? .secondary : .blue)
                         }
                     }
-                } else if showingAddSectionView {
-                    TextField("section name", text: $newSectionTitle)
-                    Button(action: {
-                        addSection()
-                    }) {
-                        Text("Add")
-                            .foregroundColor(newSectionTitle.isEmpty ? .secondary : .blue)
-                    }
-                    .disabled(newSectionTitle.isEmpty)
                 }
+            } else if showingAddSectionView {
+                TextField("section name", text: $newSectionTitle)
+                Button(action: {
+                    addSection()
+                }) {
+                    Text("Add")
+                        .foregroundColor(newSectionTitle.isEmpty ? .secondary : .blue)
+                }
+                .disabled(newSectionTitle.isEmpty)
             }
-            SwiftUI.Section {
-                NavigationLink(destination: SectionListView(sections: checklist.sections, delegate: self)) {
-                    Text("Manage sections")
-                }
+            NavigationLink(destination: SectionListView(sections: checklist.sections, delegate: self)) {
+                Text("Manage sections")
             }
         }
         .listStyle(SidebarListStyle())

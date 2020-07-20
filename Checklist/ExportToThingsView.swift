@@ -12,7 +12,6 @@ struct ExportToThingsView: View {
     @StateObject var wrapper: ChecklistsWrapper
     
     var body: some View {
-        NavigationView {
             List(wrapper.checklists) { checklist in
                 HStack {
                     Image(systemName: checklist.icon)
@@ -22,8 +21,8 @@ struct ExportToThingsView: View {
                     exportToThings(checklist: checklist)
                 }
             }
+            .listStyle(SidebarListStyle())
             .navigationTitle("Export to Things")
-        }
     }
 }
 

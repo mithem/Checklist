@@ -22,20 +22,31 @@ class ChecklistsWrapper: NSObject, ObservableObject {
     }
     
     func load () {
-        if let myChecklists = try? JSONDecoder().decode([Checklist].self, from: UserDefaults().data(forKey: "checklists") ?? Data()) {
-            checklists = myChecklists
+        
+        let ud = UserDefaults()
+        
+        if let data = ud.data(forKey: "checklists") {
+            if let myChecklists = try? JSONDecoder().decode([Checklist].self, from: data) {
+                checklists = myChecklists
+            }
         }
-        if let myGallery = try? JSONDecoder().decode([ChecklistBlueprint].self, from: UserDefaults().data(forKey: "gallery") ?? Data()) {
-            galleryChecklists = myGallery
+        
+        if let data = ud.data(forKey: "gallery") {
+            if let myGallery = try? JSONDecoder().decode([ChecklistBlueprint].self, from: data) {
+                galleryChecklists = myGallery
+            }
         }
     }
     
     func save() {
+        
+        let ud = UserDefaults()
+        
         if let data = try? JSONEncoder().encode(checklists) {
-            UserDefaults().set(data, forKey: "checklists")
+            ud.set(data, forKey: "checklists")
         }
         if let data = try? JSONEncoder().encode(galleryChecklists) {
-            UserDefaults().set(data, forKey: "gallery")
+            ud.set(data, forKey: "gallery")
         }
     }
 }

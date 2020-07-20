@@ -7,7 +7,13 @@
 
 import Foundation
 
-class ChecklistItem: Identifiable, Codable {
+class ChecklistItem: Identifiable, Codable, Equatable {
+    static func == (lhs: ChecklistItem, rhs: ChecklistItem) -> Bool {
+        let c1 = lhs.title == rhs.title
+        let c2 = lhs.checked == rhs.checked
+        return c1 && c2
+    }
+    
     let id: UUID
     var title: String
     var checked: Bool
@@ -19,7 +25,18 @@ class ChecklistItem: Identifiable, Codable {
     }
 }
 
-class Checklist: Identifiable, Codable {
+class Checklist: Identifiable, Codable, Equatable {
+    static func == (lhs: Checklist, rhs: Checklist) -> Bool {
+        for section in lhs.sections {
+            if !rhs.sections.contains(section) {
+                return false
+            }
+        }
+        let c1 = lhs.name == rhs.name
+        let c2 = lhs.icon == rhs.icon
+        return c1 && c2
+    }
+    
     let id: UUID
     var icon: String
     var name: String
@@ -33,7 +50,16 @@ class Checklist: Identifiable, Codable {
     }
 }
 
-class Section: Identifiable, Codable {
+class Section: Identifiable, Codable, Equatable {
+    static func == (lhs: Section, rhs: Section) -> Bool {
+        for item in lhs.items {
+            if !rhs.items.contains(item) {
+                return false
+            }
+        }
+        return lhs.name == rhs.name
+    }
+    
     let id: UUID
     var name: String
     var items: [ChecklistItem]
@@ -44,6 +70,8 @@ class Section: Identifiable, Codable {
         self.items = items
     }
 }
+
+//MARK: Blueprints
 
 struct SectionBlueprint: Identifiable, Codable {
     let id: UUID

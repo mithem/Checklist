@@ -6,26 +6,8 @@
 //
 
 import Foundation
-import UIKit
 
-fileprivate struct ThingsItemAttributes: Encodable {
-    var title: String
-}
-
-fileprivate struct ThingsItem: Encodable {
-    var type: String
-    var attributes: ThingsItemAttributes
-}
-
-fileprivate struct ThingsProjectAttributes: Encodable {
-    var title: String
-    var items: [ThingsItem]
-}
-
-fileprivate struct ThingsProject: Encodable {
-    var type = "project"
-    var attributes: ThingsProjectAttributes
-}
+//MARK: Checklist/Blueprint conversion
 
 func getBlueprint(from checklist: Checklist) -> ChecklistBlueprint{
     var section: SectionBlueprint
@@ -53,24 +35,26 @@ func getChecklist(from blueprint: ChecklistBlueprint) -> Checklist {
     return checklist
 }
 
-fileprivate func createProjectInThings(_ project: ThingsProject, completion: @escaping (Bool) -> Void) {
-    guard let string = String(data: (try? JSONEncoder().encode([project])) ?? Data(), encoding: .utf8) else { return }
-    guard let encodedString = string.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
-    let urlString = "things:///json?data=\(encodedString)"
-    guard let url = URL(string: urlString) else { print("Bad URL"); completion(false); return }
-    UIApplication.shared.open(url) { success in
-        completion(success)
+extension String {
+    // https://stackoverflow.com/questions/24092884/get-nth-character-of-a-string-in-swift-programming-language
+    subscript(offset: Int) -> Character { self[index(startIndex, offsetBy: offset)] }
+    subscript(range: Range<Int>) -> SubSequence {
+        let startIndex = index(self.startIndex, offsetBy: range.lowerBound)
+        return self[startIndex..<index(startIndex, offsetBy: range.count)]
+    }
+    subscript(range: ClosedRange<Int>) -> SubSequence {
+        let startIndex = index(self.startIndex, offsetBy: range.lowerBound)
+        return self[startIndex..<index(startIndex, offsetBy: range.count)]
     }
 }
 
-func exportToThings(checklist: Checklist) {
-    var items = [ThingsItem]()
-    for section in checklist.sections {
-        items.append(ThingsItem(type: "heading", attributes: ThingsItemAttributes(title: section.name.replacingOccurrences(of: " ", with: "%20"))))
-        for item in section.items {
-            items.append(ThingsItem(type: "to-do", attributes: ThingsItemAttributes(title: item.title.replacingOccurrences(of: " ", with: "%20"))))
+extension NSRegularExpression {
+    // https://www.hackingwithswift.com/articles/108/how-to-use-regular-expressions-in-swift
+    convenience init(_ pattern: String) {
+        do {
+            try self.init(pattern: pattern)
+        } catch {
+            preconditionFailure("Illegal regular expression: \(pattern).")
         }
     }
-    let project = ThingsProject(type: "project", attributes: ThingsProjectAttributes(title: checklist.name.replacingOccurrences(of: " ", with: "%20"), items: items))
-    createProjectInThings(project) { print($0) }
 }

@@ -12,26 +12,12 @@ struct SettingsView: View {
     @Environment(\.presentationMode) private var presentationMode
     
     let wrapper: ChecklistsWrapper
-    @State private var thingsExportStyle: ThingsExportStyle = ThingsExportStyle(UserDefaults().string(forKey: "thingsExportStyle") ?? "project")
     
     @State private var showingMarkdownCouldNotBeParsedActionSheet = false
     @State private var showingEmptyPasteboardActionSheet = false
     
     var body: some View {
         Form {
-            HStack {
-                Text("Export style")
-                Picker("Export style", selection: $thingsExportStyle) {
-                    Text("Project").tag(ThingsExportStyle.project)
-                    Text("ToDos").tag(ThingsExportStyle.toDos)
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .onChange(of: thingsExportStyle) {_ in
-                    saveSettings()
-                }
-            }
-            .onAppear(perform: loadSettings)
-            .onDisappear(perform: saveSettings)
             NavigationLink(destination: ExportToThingsView(wrapper: wrapper)) {
                 HStack {
                     Image(systemName: "square.and.arrow.up")
@@ -42,7 +28,7 @@ struct SettingsView: View {
                 parseChecklistFromClipboard()
             }
             .actionSheet(isPresented: $showingEmptyPasteboardActionSheet) {
-                ActionSheet(title: Text("Empty clipboard/pasteboard"), message: Text("You have no text available in your clipboard/pasteboard. Be sure to try again once you have copied appropriate markdown"), buttons: [.default(Text("OK"))])
+                ActionSheet(title: Text("Empty clipboard/pasteboard"), message: Text("You have no text available in your clipboard/pasteboard. Be sure to try again once you have copied valid markdown"), buttons: [.default(Text("OK"))])
             }
         }
         .navigationTitle("Settings")
@@ -67,15 +53,5 @@ struct SettingsView: View {
                 showingMarkdownCouldNotBeParsedActionSheet = false
             }
         }
-    }
-    
-    func loadSettings() {
-        print("Loading settings!")
-        thingsExportStyle = ThingsExportStyle(UserDefaults().string(forKey: "thingsExportStyle") ?? "project")
-    }
-    
-    func saveSettings() {
-        print("Saving settings!")
-        UserDefaults().set(thingsExportStyle.rawValue, forKey: "thingsExportStyle")
     }
 }

@@ -10,6 +10,12 @@ import XCTest
 
 class MarkdownParserTests: XCTestCase {
     
+    //https://stackoverflow.com/questions/26845307/generate-random-alphanumeric-string-in-swift
+    func randomString(of length: Int) -> String {
+      let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+      return String((0..<length).map{ _ in letters.randomElement()! })
+    }
+    
     let parser = MarkdownParser()
     
     func testCountFromBeginning() {
@@ -126,6 +132,73 @@ My checklist (still description)
         }
         waitForExpectations(timeout: 2) { error in
             XCTAssertNil(error, "Error: \(error?.localizedDescription)")
+        }
+    }
+    
+    func testParseChecklistPerformanceShort() {
+        
+        let input = """
+# Some🚀 Project (527/528)
+
+Some description as exported from Things
+
+My checklist (still description)
+- item 1
+- item 2
+
+- [+] Example task 1
+
+## Section 1
+
+- [ ] Example 🚀task 2
+
+## Sect🎉ion 2
+
+- [] Another task🎉
+
+## Yet another section
+
+- [x] task
+
+## Empty Section
+
+"""
+        
+        measure {
+            let theExpectation = expectation(description: "got checklist")
+            parser.parseChecklist(from: input) { _ in
+                print("Got it")
+                theExpectation.fulfill()
+            }
+            waitForExpectations(timeout: 1)
+        }
+    }
+    
+    func testParseChecklistPerformanceLong() {
+        var input = "# My Checklist (0/0)\n"
+        let tCount = 100
+        let sCount = 100
+        
+        for _ in 0..<100 {
+            input.append("\n" + randomString(of: 100))
+        }
+        
+        for s in 1...sCount {
+            input.append("\n\n## Section \(s)")
+            for t in 1...tCount {
+                input.append("\n\n- [x] S\(s) T\(t)")
+            }
+        }
+        
+        measure {
+            let theExpectation = expectation(description: "got checklist")
+            parser.parseChecklist(from: input) { checklist in
+                print("Got it")
+                XCTAssertEqual(checklist?.sections.count ?? 0, sCount + 1)
+                XCTAssertEqual(checklist?.sections.first?.items.count ?? 0, tCount)
+                theExpectation.fulfill()
+            }
+            waitForExpectations(timeout: 1)
         }
     }
 }

@@ -10,70 +10,48 @@ import UIKit
 
 //MARK: Data Models
 
-fileprivate struct ThingsItemAttributes: Encodable {
+struct ThingsItemAttributes: Encodable {
     var title: String
 }
 
-fileprivate struct ThingsItem: Encodable {
+struct ThingsItem: Encodable {
     var type: String
     var attributes: ThingsItemAttributes
 }
 
-fileprivate struct ThingsProjectAttributes: Encodable {
+struct ThingsProjectAttributes: Encodable {
     var title: String
     var items: [ThingsItem]
 }
 
-fileprivate struct ThingsProject: Encodable {
+struct ThingsProject: Encodable {
     var type = "project"
     var attributes: ThingsProjectAttributes
 }
 
-enum ThingsExportStyle: String {
-    case project = "project"
-    case toDos = "toDos"
-    
-    init(_ style: String) {
-        switch(style) {
-        case "project":
-            self = .project
-        case "toDos":
-            self = .toDos
-        default:
-            fatalError("Unvalid ThingsExportStyle specified: \(style)")
+//MARK:  Data generation
+
+func createThingsProject(from checklist: Checklist) -> ThingsProject {
+    var items = [ThingsItem]()
+    for section in checklist.sections {
+        items.append(ThingsItem(type: "heading", attributes: ThingsItemAttributes(title: section.name)))
+        for item in section.items {
+            items.append(ThingsItem(type: "to-do", attributes: ThingsItemAttributes(title: item.title)))
         }
     }
+    let project = ThingsProject(type: "project", attributes: ThingsProjectAttributes(title: checklist.name, items: items))
+    return project
 }
 
-//MARK:  Data generation
 func exportToThings(checklist: Checklist) {
-    switch ThingsExportStyle(UserDefaults().string(forKey: "thingsExportStyle") ?? "project") {
-    case .project:
-        var items = [ThingsItem]()
-        for section in checklist.sections {
-            items.append(ThingsItem(type: "heading", attributes: ThingsItemAttributes(title: section.name.replacingOccurrences(of: " ", with: "%20"))))
-            for item in section.items {
-                items.append(ThingsItem(type: "to-do", attributes: ThingsItemAttributes(title: item.title.replacingOccurrences(of: " ", with: "%20"))))
-            }
-        }
-        let project = ThingsProject(type: "project", attributes: ThingsProjectAttributes(title: checklist.name.replacingOccurrences(of: " ", with: "%20"), items: items))
-        sendToThings(project) { _ in }
-    case .toDos:
-        var items = [ThingsItem]()
-        for section in checklist.sections {
-            items.append(ThingsItem(type: "to-do", attributes: ThingsItemAttributes(title: section.name)))
-            for item in section.items {
-                items.append(ThingsItem(type: "checklist-item", attributes: ThingsItemAttributes(title: item.title)))
-            }
-        }
-        sendToThings(items) { _ in }
-    }
+    let project = createThingsProject(from: checklist)
+    sendToThings([project]) { print($0 ? "Project sent." : "Error sending project.") }
 }
 
 //MARK: Data transmission
 fileprivate func sendToThings<T: Encodable>(_ data: T, completion: @escaping (Bool) -> Void) {
     guard let string = String(data: (try? JSONEncoder().encode(data)) ?? Data(), encoding: .utf8) else { return }
-    guard let encodedString = string.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
+    guard let encodedString = string.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
     let urlString = "things:///json?data=\(encodedString)"
     guard let url = URL(string: urlString) else { print("Bad URL"); return }
     UIApplication.shared.open(url) { completion($0) }

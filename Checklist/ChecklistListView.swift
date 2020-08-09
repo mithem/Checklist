@@ -51,6 +51,7 @@ struct ChecklistListView: View {
                 .onDelete(perform: deleteChecklists)
             }
             .animation(.easeInOut)
+            .listStyle(SidebarListStyle())
             .navigationTitle("My checklists")
             .navigationBarItems(leading: EditButton(), trailing: Button(action: {
                 showingAddChecklistView = true

@@ -21,8 +21,9 @@ struct SelectSectionView: View {
                     delegate.tapped(section: section)
                     presentationMode.wrappedValue.dismiss()
                 }
+                .foregroundColor(.primary)
             }
-            .listStyle(SidebarListStyle())
+            .listStyle(InsetGroupedListStyle())
             .navigationTitle("Select section")
         }
     }

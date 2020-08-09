@@ -22,7 +22,7 @@ struct GalleryView: View {
                     }
                     .onDelete(perform: removeGalleryItems)
                 }
-                .listStyle(SidebarListStyle())
+                .listStyle(InsetGroupedListStyle())
                 .animation(.easeInOut)
             }
             else {

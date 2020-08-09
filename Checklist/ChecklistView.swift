@@ -17,11 +17,16 @@ struct ChecklistView: View {
     @State var checklist: Checklist
     
     @State private var showingEmptyItem = false
-    @State private var showingItemVsSectionSelectActionSheet = false
     @State private var showingAddSectionView = false
+    @State private var showingSelectSectionView = false
+    
+    @State private var showingSectionHasItemsWhenDeletingActionSheet = false
+    @State private var showingItemVsSectionSelectActionSheet = false
     
     @State private var newItemTitle = ""
     @State private var newSectionTitle = ""
+    
+    @State private var sectionOffsetToDelete = IndexSet()
     
     var body: some View {
         List {
@@ -30,9 +35,16 @@ struct ChecklistView: View {
                     TextField("new item", text: $newItemTitle)
                     Group {
                         if checklist.sections.count > 1 {
-                            NavigationLink(destination: SelectSectionView(sections: checklist.sections, delegate: self)) {
-                                Text("Add")
-                                    .foregroundColor(newItemTitle.isEmpty ? .secondary : .blue)
+                            Button(action: {
+                                showingSelectSectionView = true
+                            }) {
+                                HStack {
+                                    Text("Add")
+                                        .foregroundColor(newItemTitle.isEmpty ? .secondary : .blue)
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(newItemTitle.isEmpty ? .secondary : .black)
+                                }
                             }
                             .disabled(newItemTitle.isEmpty)
                         } else if checklist.sections.count == 1 {
@@ -42,7 +54,11 @@ struct ChecklistView: View {
                                 Text("Add")
                                     .foregroundColor(newItemTitle.isEmpty ? .secondary : .blue)
                             }
+                            .disabled(newItemTitle.isEmpty)
                         }
+                    }
+                    .sheet(isPresented: $showingSelectSectionView) {
+                        SelectSectionView(sections: checklist.sections, delegate: self)
                     }
                 }
             }
@@ -84,11 +100,22 @@ struct ChecklistView: View {
                     }
                 }
             }
+            .onDelete { offsets in
+                sectionOffsetToDelete = offsets
+                if checklist.sections[offsets[offsets.startIndex]].items.count == 0 {
+                    deleteSection()
+                } else {
+                    showingSectionHasItemsWhenDeletingActionSheet = true
+                }
+            }
             NavigationLink(destination: SectionListView(sections: checklist.sections, delegate: self)) {
                 Text("Manage sections")
             }
+            .actionSheet(isPresented: $showingSectionHasItemsWhenDeletingActionSheet) {
+                ActionSheet(title: Text("Section has items"), message: Text("All items in the section will be deleted permanently."), buttons: [.cancel(), .destructive(Text("Delete")) {deleteSection()}])
+            }
         }
-        .listStyle(SidebarListStyle())
+        .listStyle(SidebarListStyle()) // InsetGroupedListStyle doesn't give ability to collapse sections?!
         .animation(.easeInOut)
         .navigationTitle(checklist.name)
         .navigationBarItems(leading: EditButton(), trailing: Button(action: {
@@ -134,6 +161,12 @@ struct ChecklistView: View {
         } else if checklist.sections.first!.items.count == 0{
             showingEmptyItem = true
         }
+    }
+    
+    func deleteSection() {
+        checklist.sections.remove(atOffsets: sectionOffsetToDelete)
+        delegate.changeChecklist(checklist)
+        checkForEmptyList()
     }
     
     func deleteItems(offsets: IndexSet, of section: Section) {

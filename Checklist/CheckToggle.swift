@@ -33,6 +33,9 @@ struct CheckToggle: View {
 
 struct CheckToggle_Previews: PreviewProvider {
     static var previews: some View {
-        CheckToggle(value: true) { _ in }
+        Group {
+            CheckToggle(value: true) { _ in }
+            CheckToggle(value: false) { _ in }
+        }
     }
 }

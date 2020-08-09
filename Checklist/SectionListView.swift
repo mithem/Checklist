@@ -22,7 +22,7 @@ struct SectionListView: View {
             .onMove(perform: moveSections)
             .onDelete(perform: deleteSections)
         }
-        .listStyle(SidebarListStyle())
+        .listStyle(InsetGroupedListStyle())
         .onDisappear {
             delegate.apply(sections: sections)
         }

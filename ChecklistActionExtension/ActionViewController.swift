@@ -33,7 +33,6 @@ class ActionViewController: UIViewController {
                                     print(wrapper.checklists)
                                     wrapper.save()
                                     self.label.text = "Saved checklist."
-                                    print(try? JSONDecoder().decode([Checklist].self, from: UserDefaults().data(forKey: "checklists") ?? Data()))
                                 } else {
                                     self.label.text = "Unable to parse checklist. We support Markdown."
                                 }

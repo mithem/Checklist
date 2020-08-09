@@ -21,7 +21,7 @@ struct ExportToThingsView: View {
                     exportToThings(checklist: checklist)
                 }
             }
-            .listStyle(SidebarListStyle())
+            .listStyle(InsetGroupedListStyle())
             .navigationTitle("Export to Things")
     }
 }

@@ -31,6 +31,7 @@ struct SettingsView: View {
                 ActionSheet(title: Text("Empty clipboard/pasteboard"), message: Text("You have no text available in your clipboard/pasteboard. Be sure to try again once you have copied valid markdown"), buttons: [.default(Text("OK"))])
             }
         }
+        .onAppear(perform: resetActiveChecklist)
         .navigationTitle("Settings")
         .actionSheet(isPresented: $showingMarkdownCouldNotBeParsedActionSheet) {
             ActionSheet(title: Text("Unable to parse markdown"), message: Text("The text in your clipboard/pasteboard could not be parsed."), buttons: [.default(Text("OK"))])

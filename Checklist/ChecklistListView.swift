@@ -17,6 +17,8 @@ struct ChecklistListView: View {
     @State private var showingAddChecklistView = false
     @State private var showingAddedToGalleryActionSheet = false
     
+    @State var checklistToShow: UUID? = nil
+    
     var body: some View {
         NavigationView {
             List {
@@ -35,7 +37,7 @@ struct ChecklistListView: View {
                     }
                 }
                 ForEach(wrapper.checklists) { checklist in
-                    NavigationLink(destination: ChecklistView(delegate: self, checklist: checklist)) {
+                    NavigationLink(destination: ChecklistView(delegate: self, checklist: checklist), tag: checklist.id, selection: $checklistToShow) {
                         HStack {
                             Image(systemName: "plus")
                                 .onTapGesture {
@@ -67,6 +69,7 @@ struct ChecklistListView: View {
         .onDisappear {
             wrapper.save()
         }
+        .onAppear(perform: resetActiveChecklist)
         .sheet(isPresented: $showingAddChecklistView) {
             AddChecklistView(delegate: self)
         }

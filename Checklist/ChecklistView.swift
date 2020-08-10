@@ -126,9 +126,14 @@ struct ChecklistView: View {
                 .padding()
         })
         .onAppear(perform: checkForEmptyList)
+        .onAppear(perform: saveActiveChecklist)
         .actionSheet(isPresented: $showingItemVsSectionSelectActionSheet) {
             ActionSheet(title: Text("Add menu"), message: Text("Which one do you want to add to your checklist?"), buttons: [.default(Text("Item")) {showingEmptyItem = true}, .default(Text("Section")) {showingAddSectionView = true}, .cancel()])
         }
+    }
+    
+    func saveActiveChecklist() {
+        UserDefaults().set(checklist.id.uuidString, forKey: "activeChecklist")
     }
     
     func toggleItem(id: UUID) {

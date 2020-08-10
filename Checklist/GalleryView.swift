@@ -40,6 +40,7 @@ struct GalleryView: View {
                 .padding()
             }
         }
+        .onAppear(perform: resetActiveChecklist)
         .navigationTitle("Gallery")
         .navigationBarItems(trailing: EditButton())
     }

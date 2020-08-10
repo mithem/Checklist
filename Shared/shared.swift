@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 //MARK: Checklist/Blueprint conversion
 
@@ -35,6 +36,12 @@ func getChecklist(from blueprint: ChecklistBlueprint) -> Checklist {
     return checklist
 }
 
+func resetActiveChecklist() {
+    UserDefaults().set(nil, forKey: "activeChecklist")
+}
+
+//MARK: Extensions
+
 extension String {
     // https://stackoverflow.com/questions/24092884/get-nth-character-of-a-string-in-swift-programming-language
     subscript(offset: Int) -> Character { self[index(startIndex, offsetBy: offset)] }
@@ -56,5 +63,19 @@ extension NSRegularExpression {
         } catch {
             preconditionFailure("Illegal regular expression: \(pattern).")
         }
+    }
+}
+
+extension UIDevice {
+    // https://stackoverflow.com/questions/11197509/how-to-get-device-make-and-model-on-ios
+    var modelName: String {
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        let machineMirror = Mirror(reflecting: systemInfo.machine)
+        let identifier = machineMirror.children.reduce("") { identifier, element in
+            guard let value = element.value as? Int8, value != 0 else { return identifier }
+            return identifier + String(UnicodeScalar(UInt8(value)))
+        }
+        return identifier
     }
 }

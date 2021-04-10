@@ -83,14 +83,7 @@ struct ChecklistView: View {
             ForEach(checklist.sections) { section in
                 SwiftUI.Section(header: Text(section.name).textCase(.none)) {
                     ForEach(section.items) { checklistItem in
-                        HStack {
-                            CheckToggle(value: checklistItem.checked) { checked in
-                                section.items[section.items.firstIndex(where: {$0.id == checklistItem.id})!].checked = checked
-                                delegate.changeChecklist(checklist)
-                            }
-                            Text(checklistItem.title)
-                                .foregroundColor(checklistItem.checked ? .secondary : .primary)
-                        }
+                        ChecklistItemView(sectionId: section.id, item: checklistItem, initialChecked: checklistItem.checked, delegate: self)
                     }
                     .onMove { source, destination in
                         moveItems(source: source, destination: destination, in: section)
@@ -195,6 +188,14 @@ extension ChecklistView: SelectSectionViewDelegate {
 extension ChecklistView: SectionListViewDelegate {
     func apply(sections: [Section]) {
         checklist.sections = sections
+        delegate.changeChecklist(checklist)
+    }
+}
+
+extension ChecklistView: ChecklistItemViewDelegate {
+    func checkItem(sectionId: UUID, id: UUID, checked: Bool) {
+        guard let section = checklist.sections.first(where: {$0.id == sectionId}) else { return }
+        section.items[section.items.firstIndex(where: {$0.id == id})!].checked = checked
         delegate.changeChecklist(checklist)
     }
 }

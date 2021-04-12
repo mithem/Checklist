@@ -22,12 +22,12 @@
 	<string>1</string>
 	<key>NSExtension</key>
 	<dict>
-		<key>NSExtensionMainStoryboard</key>
-		<string>MainInterface</string>
-		<key>NSExtensionPointIdentifier</key>
-		<string>com.apple.ui-services</string>
+		<key>NSExtensionPrincipalClass</key>
+		<string>ActionViewController</string>
 		<key>NSExtensionAttributes</key>
 		<dict>
+			<key>NSExtensionServiceRoleType</key>
+			<string>NSExtensionServiceRoleTypeViewer</string>
 			<key>NSExtensionActivationRule</key>
 			<dict>
 				<key>NSExtensionActivationSupportsText</key>
@@ -44,6 +44,10 @@
 			<key>NSExtensionServiceTouchBarIconName</key>
 			<string>NSActionTemplate</string>
 		</dict>
+		<key>NSExtensionMainStoryboard</key>
+		<string>MainInterface</string>
+		<key>NSExtensionPointIdentifier</key>
+		<string>com.apple.ui-services</string>
 	</dict>
 </dict>
 </plist>

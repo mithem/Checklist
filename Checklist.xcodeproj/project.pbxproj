@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -28,7 +28,7 @@
 		49AEC93D24C2F03900B05264 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49AEC93C24C2F03900B05264 /* Media.xcassets */; };
 		49AEC93F24C2F03900B05264 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AEC93E24C2F03900B05264 /* ActionViewController.swift */; };
 		49AEC94224C2F03900B05264 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49AEC94024C2F03900B05264 /* MainInterface.storyboard */; };
-		49AEC94624C2F03900B05264 /* ChecklistActionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 49AEC93A24C2F03900B05264 /* ChecklistActionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		49AEC94624C2F03900B05264 /* ChecklistActionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 49AEC93A24C2F03900B05264 /* ChecklistActionExtension.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		49AEC94C24C2F3D600B05264 /* ThingsExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AEC94B24C2F3D600B05264 /* ThingsExport.swift */; };
 		49AEC95E24C2FAE300B05264 /* MarkdownParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AEC95B24C2FA1200B05264 /* MarkdownParserTests.swift */; };
 		49AEC97024C446DD00B05264 /* models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492782DE24BEF41200415EC8 /* models.swift */; };
@@ -533,6 +533,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Checklist/Checklist.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Checklist/Preview Content\"";
 				DEVELOPMENT_TEAM = MHQFP8C3YS;
 				ENABLE_PREVIEWS = YES;
@@ -542,7 +543,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = mithem.Checklist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mithem.Checklist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
@@ -558,6 +559,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Checklist/Checklist.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Checklist/Preview Content\"";
 				DEVELOPMENT_TEAM = MHQFP8C3YS;
 				ENABLE_PREVIEWS = YES;
@@ -567,7 +569,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = mithem.Checklist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mithem.Checklist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
@@ -587,10 +589,10 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = mithem.Checklist.ChecklistActionExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mithem.Checklist.ChecklistActionExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -608,10 +610,10 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = mithem.Checklist.ChecklistActionExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mithem.Checklist.ChecklistActionExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
